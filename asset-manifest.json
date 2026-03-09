@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pricechecker/static/css/main.6f3e9f8e.css",
+    "main.js": "/pricechecker/static/js/main.44aef9f4.js",
+    "index.html": "/pricechecker/index.html",
+    "main.6f3e9f8e.css.map": "/pricechecker/static/css/main.6f3e9f8e.css.map",
+    "main.44aef9f4.js.map": "/pricechecker/static/js/main.44aef9f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f3e9f8e.css",
+    "static/js/main.44aef9f4.js"
+  ]
+}
