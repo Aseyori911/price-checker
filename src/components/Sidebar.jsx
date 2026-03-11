@@ -1,13 +1,14 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { LayoutDashboard, Rss, PlusSquare, BarChart2, Settings } from 'lucide-react';
 
 const navItems = [
-  { icon: '⌂', label: 'Dashboard', path: '/dashboard' },
-  { icon: '◈', label: 'Feed', path: '/feed' },
-  { icon: '+', label: 'Post', path: '/post' },
-  { icon: '⇌', label: 'Compare', path: '/compare' },
-  { icon: '⚙️', label: 'Settings', path: '/settings' },
+  { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
+  { icon: Rss,             label: 'Feed',      path: '/feed' },
+  { icon: PlusSquare,      label: 'Post',      path: '/post' },
+  { icon: BarChart2,       label: 'Compare',   path: '/compare' },
+  { icon: Settings,        label: 'Settings',  path: '/settings' },
 ];
 
 function Sidebar() {
@@ -17,17 +18,25 @@ function Sidebar() {
 
   return (
     <>
-      {/* ======================== */}
-      {/* DESKTOP SIDEBAR */}
-      {/* ======================== */}
+      {/* ================================ */}
+      {/* DESKTOP SIDEBAR                  */}
+      {/* ================================ */}
       <aside
         className="desktop-sidebar"
         style={{
-          width: '220px', background: theme.sidebar,
+          width: '220px',
+          background: theme.sidebar,
           borderRight: `1px solid ${theme.sidebarBorder}`,
-          display: 'flex', flexDirection: 'column',
-          padding: '32px 16px', position: 'sticky',
-          top: 0, height: '100vh', transition: 'all 0.3s', flexShrink: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '32px 16px',
+          position: 'fixed',
+          top: 0, left: 0,
+          height: '100vh',
+          zIndex: 100,
+          transition: 'all 0.3s',
+          flexShrink: 0,
+          overflowY: 'auto',
         }}
       >
         {/* LOGO */}
@@ -36,21 +45,26 @@ function Sidebar() {
           <div style={{ fontSize: '10px', color: theme.textMuted, letterSpacing: '2px', textTransform: 'uppercase' }}>Nigeria</div>
         </div>
 
-        {/* NAV */}
+        {/* NAV ITEMS */}
         <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
           {navItems.map((item) => {
             const active = location.pathname === item.path;
+            const Icon = item.icon;
             return (
-              <div key={item.path} onClick={() => navigate(item.path)} style={{
-                display: 'flex', alignItems: 'center', gap: '12px',
-                padding: '11px 14px', borderRadius: '10px', cursor: 'pointer',
-                fontSize: '13px', fontWeight: active ? 700 : 400,
-                background: active ? theme.navActive : 'transparent',
-                color: active ? theme.navActiveText : theme.navText,
-                borderLeft: `2px solid ${active ? theme.navActiveBorder : 'transparent'}`,
-                transition: 'all 0.15s',
-              }}>
-                <span style={{ fontSize: '15px', width: '20px', textAlign: 'center' }}>{item.icon}</span>
+              <div
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '12px',
+                  padding: '11px 14px', borderRadius: '10px', cursor: 'pointer',
+                  fontSize: '13px', fontWeight: active ? 700 : 400,
+                  background: active ? theme.navActive : 'transparent',
+                  color: active ? theme.navActiveText : theme.navText,
+                  borderLeft: `2px solid ${active ? theme.navActiveBorder : 'transparent'}`,
+                  transition: 'all 0.15s',
+                }}
+              >
+                <Icon size={17} strokeWidth={active ? 2.5 : 1.8} />
                 {item.label}
               </div>
             );
@@ -72,17 +86,20 @@ function Sidebar() {
         </div>
       </aside>
 
-      {/* ======================== */}
-      {/* MOBILE TOP BAR */}
-      {/* ======================== */}
+      {/* ================================ */}
+      {/* MOBILE TOP BAR                   */}
+      {/* ================================ */}
       <div
         className="mobile-topbar"
         style={{
           display: 'none',
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-          background: theme.sidebar, borderBottom: `1px solid ${theme.sidebarBorder}`,
-          padding: '14px 20px', alignItems: 'center', justifyContent: 'space-between',
-          transition: 'all 0.3s'
+          background: theme.sidebar,
+          borderBottom: `1px solid ${theme.sidebarBorder}`,
+          padding: '14px 20px',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          transition: 'all 0.3s',
         }}
       >
         {/* LOGO */}
@@ -91,78 +108,93 @@ function Sidebar() {
           <div style={{ fontSize: '9px', color: theme.textMuted, letterSpacing: '2px', textTransform: 'uppercase' }}>Nigeria</div>
         </div>
 
-        {/* AVATAR — taps to Settings */}
+        {/* AVATAR → Settings */}
         <div
           onClick={() => navigate('/settings')}
           style={{
-            width: '34px', height: '34px', borderRadius: '50%',
+            width: '36px', height: '36px', borderRadius: '50%',
             background: 'linear-gradient(135deg, #00e676, #00b0ff)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '11px', fontWeight: 800, color: '#0a0a0f', cursor: 'pointer'
-          }}>CO</div>
+            fontSize: '11px', fontWeight: 800, color: '#0a0a0f', cursor: 'pointer',
+          }}
+        >CO</div>
       </div>
 
-      {/* ======================== */}
-      {/* MOBILE BOTTOM NAV */}
-      {/* ======================== */}
+      {/* ================================ */}
+      {/* MOBILE BOTTOM NAV                */}
+      {/* ================================ */}
       <div
         className="mobile-bottomnav"
         style={{
           display: 'none',
           position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
-          background: theme.sidebar, borderTop: `1px solid ${theme.sidebarBorder}`,
-          padding: '8px 0 12px', transition: 'all 0.3s'
+          background: theme.sidebar,
+          borderTop: `1px solid ${theme.sidebarBorder}`,
+          paddingTop: '8px',
+          paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
+          transition: 'all 0.3s',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end' }}>
           {navItems.map((item) => {
             const active = location.pathname === item.path;
             const isPost = item.path === '/post';
+            const Icon = item.icon;
             return (
               <div
                 key={item.path}
                 onClick={() => navigate(item.path)}
                 style={{
                   display: 'flex', flexDirection: 'column', alignItems: 'center',
-                  gap: '4px', cursor: 'pointer', padding: '4px 8px',
+                  gap: '3px', cursor: 'pointer',
+                  padding: '4px 12px',
+                  minWidth: '56px',
                   transition: 'all 0.15s',
                 }}
               >
                 <div style={{
-                  width: isPost ? '48px' : '36px',
-                  height: isPost ? '48px' : '36px',
-                  borderRadius: isPost ? '14px' : '10px',
+                  width: isPost ? '50px' : '38px',
+                  height: isPost ? '50px' : '38px',
+                  borderRadius: isPost ? '16px' : '11px',
                   background: isPost
                     ? `linear-gradient(135deg, ${theme.accent}, #00c853)`
                     : active ? theme.navActive : 'transparent',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: isPost ? '22px' : '18px',
                   color: isPost ? '#0a0a0f' : active ? theme.navActiveText : theme.navText,
-                  marginTop: isPost ? '-16px' : '0',
-                  boxShadow: isPost ? `0 4px 16px ${theme.accent}50` : 'none',
+                  marginTop: isPost ? '-18px' : '0',
+                  boxShadow: isPost ? `0 6px 20px ${theme.accent}60` : 'none',
                   border: active && !isPost ? `1px solid ${theme.navActiveBorder}30` : 'none',
                   transition: 'all 0.15s',
                 }}>
-                  {item.icon}
+                  <Icon size={isPost ? 22 : 19} strokeWidth={active || isPost ? 2.5 : 1.8} />
                 </div>
-                {!isPost && (
-                  <span style={{
-                    fontSize: '10px', fontWeight: active ? 700 : 400,
-                    color: active ? theme.navActiveText : theme.navText,
-                  }}>{item.label}</span>
-                )}
+                <span style={{
+                  fontSize: '10px',
+                  fontWeight: active ? 700 : 400,
+                  color: isPost
+                    ? theme.accent
+                    : active ? theme.navActiveText : theme.navText,
+                  marginTop: '1px',
+                }}>
+                  {item.label}
+                </span>
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* CSS */}
+      {/* RESPONSIVE CSS */}
       <style>{`
         @media (max-width: 768px) {
           .desktop-sidebar { display: none !important; }
-          .mobile-topbar { display: flex !important; }
+          .mobile-topbar   { display: flex !important; }
           .mobile-bottomnav { display: block !important; }
+        }
+        @media (min-width: 769px) {
+          .mobile-topbar    { display: none !important; }
+          .mobile-bottomnav { display: none !important; }
+          .desktop-sidebar  { display: flex !important; }
         }
       `}</style>
     </>
