@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/price-checker/static/css/main.4e0fb6d6.css",
-    "main.js": "/price-checker/static/js/main.5128511a.js",
+    "main.css": "/price-checker/static/css/main.58530579.css",
+    "main.js": "/price-checker/static/js/main.27894b5f.js",
     "index.html": "/price-checker/index.html",
-    "main.4e0fb6d6.css.map": "/price-checker/static/css/main.4e0fb6d6.css.map",
-    "main.5128511a.js.map": "/price-checker/static/js/main.5128511a.js.map"
+    "main.58530579.css.map": "/price-checker/static/css/main.58530579.css.map",
+    "main.27894b5f.js.map": "/price-checker/static/js/main.27894b5f.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e0fb6d6.css",
-    "static/js/main.5128511a.js"
+    "static/css/main.58530579.css",
+    "static/js/main.27894b5f.js"
   ]
 }
